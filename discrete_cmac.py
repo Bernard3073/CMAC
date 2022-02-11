@@ -21,7 +21,7 @@ def main():
     weight_arr = np.zeros(weight).tolist()
     epoch_count = 1
     num_epoch = 100
-    window_size = 10
+    window_size = 5
     overlap = 35
     learning_rate = 0.1
     data_over_epoch = []
@@ -36,9 +36,9 @@ def main():
                 desire = training_data[i][1]
                 
                 associate_func = weight * (cur/window_size)
-                lower = 0 if associate_func - (o) < 0 else associate_func - (o) 
-                upper = weight-1 if associate_func + (o) > weight-1 else associate_func + (o) 
-                print(lower, upper)
+                lower = 0 if associate_func - (o/2) < 0 else associate_func - (o/2) 
+                upper = weight-1 if associate_func + (o/2) > weight-1 else associate_func + (o/2) 
+                # print(lower, upper)
                 pred = 0
                 for j in range(int(lower), int(upper)):
                     pred += weight_arr[j] * cur
@@ -46,9 +46,11 @@ def main():
 
                 error = desire - pred
                 error_list.append(error)
+                # error correction
+                corrected_val = error / overlap
                 # update weights
                 for i in range(int(lower), int(upper)):
-                    weight_arr[i] += learning_rate * error/(upper-lower)
+                    weight_arr[i] += learning_rate * corrected_val
             
             data_over_epoch.append([pred, error, weight_arr])
             epoch_count += 1
@@ -60,8 +62,8 @@ def main():
             desire = testing_data[i][1]
                 
             associate_func = weight * (cur/window_size)
-            lower = 0 if associate_func - (o) < 0 else associate_func - (o) 
-            upper = weight-1 if associate_func + (o) > weight-1 else associate_func + (o) 
+            lower = 0 if associate_func - (o/2) < 0 else associate_func - (o/2) 
+            upper = weight-1 if associate_func + (o/2) > weight-1 else associate_func + (o/2) 
 
             pred = 0
             for j in range(int(lower), int(upper)):
