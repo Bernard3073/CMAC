@@ -16,7 +16,6 @@ def main():
         if i not in training_data_idx:
             testing_data_idx.append(i)
     testing_data = [[X[i], Y[i]] for i in testing_data_idx]
-    hash_func = dict()
     weight = 35
     weight_arr = np.zeros(weight).tolist()
     epoch_count = 1
@@ -25,7 +24,6 @@ def main():
     overlap = 35
     learning_rate = 0.1
     data_over_epoch = []
-    overlap_data = []
     for o in range(1,overlap):
         while epoch_count <= num_epoch:
 
