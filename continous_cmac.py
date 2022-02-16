@@ -7,53 +7,6 @@ from tqdm import tqdm
 sample function at 100
 training: 70, testing: 30
 '''
-def main():
-    X = np.linspace(0, 2 * np.pi, 100)
-    # X = np.linspace(0, 10, 100)
-    Y = np.sin(X)
-    training_data_idx = np.random.choice(len(X), size=70, replace=False)
-    training_data_idx.sort()
-    training_data = [[X[i], Y[i]] for i in training_data_idx]
-    testing_data_idx = []
-    for i in range(100):
-        if i not in training_data_idx:
-            testing_data_idx.append(i)
-    testing_data = [X[i] for i in testing_data_idx]
-    weight = 0.0
-    w_zero = []
-    w_save =  w_zero
-    error = mean_sq_array = total_time= gen_list = w_rand = weight_save = []
-    start = time.time()     
-    gen = 3
-    mean_square_error = 1
-    for g in tqdm(range(1, 37,2)):
-        # generate the weight array with size 35 
-        weight_arr = np.random.rand(35)
-        padding = int((g - 1) / 2)
-        # Creating padding on both ends
-        weight_arr = np.append(np.zeros((padding)), weight_arr)
-        weight_arr = np.append(weight_arr, np.zeros(padding))
-
-
-        while mean_square_error > 0.01: 
-            # Training 
-            for j in range(0, 70):
-                q = j / 2
-
-                
-
-                w_new_value =   weight / g
-                y_train = training_data[j][1]
-
-                e = y_train - w_new_value
-                error = np.append(error, e)
-                # Error Correction
-                corrected_val = e / g  
-
-                
-                
-                weight = 0
-
 
 def main():
     X = np.linspace(0, 2 * np.pi, 100)
